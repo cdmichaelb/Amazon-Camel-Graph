@@ -1,7 +1,8 @@
 // ==UserScript==
 // @name           Amazon Camel Graph Revived/Fixed Again
-// @Author         cdmichaelb
-// @version        2.0.1
+// @author         cdmichaelb
+// @downloadURL    https://raw.githubusercontent.com/cdmichaelb/Amazon-Camel-Graph/main/camel3amazon.user.js
+// @version        2.0.3
 // @description    Add CamelCamelCamel graph + link to Amazon product pages.
 // @namespace      AmazonCamelGraph
 // @include        https://*amazon.*/*
@@ -9,6 +10,8 @@
 // @require        https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js
 // @require        https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js
 // @grant          GM_xmlhttpRequest
+// @run-at         document-end
+// @run-at document-end
 // ==/UserScript==
 
 var width = 600; // width of the graph
