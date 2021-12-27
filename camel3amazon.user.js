@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name           Amazon Camel Graph Revived/Fixed Again
-// @version        2.0.0
+// @Author         cdmichaelb
+// @version        2.0.1
 // @description    Add CamelCamelCamel graph + link to Amazon product pages.
 // @namespace      AmazonCamelGraph
 // @include        https://*amazon.*/*
