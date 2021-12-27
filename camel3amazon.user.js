@@ -2,7 +2,7 @@
 // @name           Amazon Camel Graph Revived/Fixed Again
 // @author         cdmichaelb
 // @downloadURL    https://raw.githubusercontent.com/cdmichaelb/Amazon-Camel-Graph/main/camel3amazon.user.js
-// @version        2.0.3
+// @version        2.0.4
 // @description    Add CamelCamelCamel graph + link to Amazon product pages.
 // @namespace      AmazonCamelGraph
 // @include        https://*amazon.*/*
@@ -74,7 +74,7 @@ var link2 =
 	country +
 	".camelcamelcamel.com/product/" +
 	asin +
-	"'><div class='m-0 p-0'; z-index: 15000; style=' height: " +
+	"'><div id='toasty-image' class='m-0 p-0'; z-index: 15000; style='position: static; height: " +
 	height2 +
 	"px;  width: " +
 	width +
@@ -83,13 +83,13 @@ var link2 =
 	"/" +
 	asin +
 	"/" +
-	`${chart}.png?force=1&zero=0&w=${width}&h=${height}&desired=false&legend=1&ilt=1&tp=all&fo=0) no-repeat bottom;  background-size: 100% auto;'></div></a>`;
+	`${chart}.png?force=1&zero=0&w=${width}&h=${height}&desired=false&legend=1&ilt=1&tp=all&fo=0) no-repeat bottom;  background-size: 100% auto;'></div></a><div class="p-0 m-0" style="position: static;width: fit-content"><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close">X</button></div>`;
 var camelurl = `https://${country}.camelcamelcamel.com/product/${asin}`; // create the CamelCamelCamel URL
 // Generate the bootstrap divs
 var bootstrap = `<button type="button" class="btn bg-dark text-light m-0 p-0" id="liveToastBtn">Price History</button>
 <div class="p-0 m-0" style="position:relative;z-index: 15000">
-  <div id="liveToast" class="toast translate-middle-x m-0 p-0" role="alert" aria-live="assertive" aria-atomic="true" style="position:absolute;z-index: 15000">
-    <div class="toast-body m-0 p-0" style="position:float;z-index: 15000">
+  <div id="liveToast" class="toast translate-middle-x m-0 p-0" role="alert" aria-live="assertive" aria-atomic="true" style="position: static;width: fit-content;z-index: 15000">
+    <div class="toast-body m-0 p-0" style="position: static;width: fit-content;z-index: 15000">
       ${link2}
     </div>
   </div>
@@ -98,19 +98,21 @@ var bootstrap = `<button type="button" class="btn bg-dark text-light m-0 p-0" id
 var bootstrapScript = `
 <script>var toastTrigger = document.getElementById('liveToastBtn') // get the button
 var toastGraph = document.getElementById('liveToast') // get the toast
+var toastImage = document.getElementById('toasty-image') // get the image
 if (toastTrigger) { // if the button exists
+  
   toastTrigger.addEventListener('click', function () { // add event listener to the button
     var toast = new bootstrap.Toast(toastGraph)
     toast.show() // show the toast
   });
-    toastTrigger.addEventListener('mouseover', function () { // show the toast on mouseover
+  toastTrigger.addEventListener('mouseover', function () { // show the toast on mouseover
     var toast = new bootstrap.Toast(toastGraph)
     toast.show() // show the toast
   });
   window.onload = function() { // when the page loads
     var toast = new bootstrap.Toast(toastGraph)
     toast.show() // show the toast
-  };
+};
 }</script>
 `;
 
