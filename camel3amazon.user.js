@@ -11,62 +11,67 @@
 // @grant          GM_xmlhttpRequest
 // ==/UserScript==
 
-var width = 600;
-var height = 250;
+var width = 600; // width of the graph
+var height = 250; // height of the graph
 var heightmod = 0.96; //don't edit this
-var height2;
+var height2; //don't edit this
 var chart = "amazon-new"; //Possible other values are "amazon", "new", "used", "new-used", & "amazon-new-used"
 
 (function (doc) {
 	// ASIN.0 in kindle store
 	var asin = doc.getElementById("ASIN") || doc.getElementsByName("ASIN.0")[0];
-	var productTitle = doc.getElementById("productTitle").innerHTML;
+	var productTitle = doc.getElementById("productTitle").innerHTML; // title of the product
 
-	var words = productTitle.split(" ");
+	var words = productTitle.split(" "); // split the title into words
 	words = words.filter(function (e) {
-		return e;
+		// remove empty strings
+		return e; // return true if the element is not empty
 	});
 
-	var wordCount = words.length;
+	var wordCount = words.length; // number of words in the title
 	if (wordCount > 6) {
-		heightmod = 0.9;
+		// if there are more than 6 words in the title
+		heightmod = 0.9; // make the graph shorter
 	}
-
 	if (wordCount > 14) {
-		heightmod = 0.85;
-
-		if (wordCount > 24) {
-			heightmod = 0.78;
-		}
+		// if there are more than 14 words in the title
+		heightmod = 0.85; // make the graph shorter
 	}
-	height2 = height * heightmod;
+	if (wordCount > 24) {
+		// if there are more than 24 words in the title
+		heightmod = 0.78; // make the graph shorter
+	}
+	height2 = height * heightmod; // calculate the height of the graph
 
 	if (asin) {
-		asin = asin.value;
-		history.replaceState(null, "", "/dp/" + asin + "/");
+		asin = asin.value; // get the ASIN
+		history.replaceState(null, "", "/dp/" + asin + "/"); // change the URL to the ASIN
 	}
-})(document);
+})(document); // run the function on the current page
 
-var arr = document.domain.split(".");
-var country = arr[arr.length - 1];
+var arr = document.domain.split("."); // split the domain into parts
+var country = arr[arr.length - 1]; // get the last part of the domain
 if (country == "com") {
-	country = "us";
+	// if the country is US
+	country = "us"; // set the country to US
 }
 
-var element = $(':input[id="ASIN"]');
-var asin = $.trim(element.attr("value"));
+var element = $(':input[id="ASIN"]'); // get the ASIN input
+var asin = $.trim(element.attr("value")); // get the ASIN
 
 if (asin == "") {
-	element = $(':input[id="ASIN"]');
-	asin = $.trim(element.attr("value"));
+	// if the ASIN is empty
+	element = $(':input[id="ASIN"]'); // get the ASIN input
+	asin = $.trim(element.attr("value")); // get the ASIN
 }
 
+// Generate the link and graph
 var link2 =
 	"<a target='blank' href='https://" +
 	country +
 	".camelcamelcamel.com/product/" +
 	asin +
-	"'><div style=' height: " +
+	"'><div class='m-0 p-0'; z-index: 15000; style=' height: " +
 	height2 +
 	"px;  width: " +
 	width +
@@ -76,30 +81,32 @@ var link2 =
 	asin +
 	"/" +
 	`${chart}.png?force=1&zero=0&w=${width}&h=${height}&desired=false&legend=1&ilt=1&tp=all&fo=0) no-repeat bottom;  background-size: 100% auto;'></div></a>`;
-var camelurl = `https://${country}.camelcamelcamel.com/product/${asin}`;
+var camelurl = `https://${country}.camelcamelcamel.com/product/${asin}`; // create the CamelCamelCamel URL
+// Generate the bootstrap divs
 var bootstrap = `<button type="button" class="btn bg-dark text-light m-0 p-0" id="liveToastBtn">Price History</button>
-<div class="p-0" style="position:relative;z-index: 15000">
+<div class="p-0 m-0" style="position:relative;z-index: 15000">
   <div id="liveToast" class="toast translate-middle-x m-0 p-0" role="alert" aria-live="assertive" aria-atomic="true" style="position:absolute;z-index: 15000">
     <div class="toast-body m-0 p-0" style="position:float;z-index: 15000">
       ${link2}
     </div>
   </div>
 </div>`;
+// Bootstrap Script
 var bootstrapScript = `
-<script>var toastTrigger = document.getElementById('liveToastBtn')
-var toastLiveExample = document.getElementById('liveToast')
-if (toastTrigger) {
-  toastTrigger.addEventListener('click', function () {
-    var toast = new bootstrap.Toast(toastLiveExample)
-    toast.show()
+<script>var toastTrigger = document.getElementById('liveToastBtn') // get the button
+var toastGraph = document.getElementById('liveToast') // get the toast
+if (toastTrigger) { // if the button exists
+  toastTrigger.addEventListener('click', function () { // add event listener to the button
+    var toast = new bootstrap.Toast(toastGraph)
+    toast.show() // show the toast
   });
-    toastTrigger.addEventListener('mouseover', function () {
-    var toast = new bootstrap.Toast(toastLiveExample)
-    toast.show()
+    toastTrigger.addEventListener('mouseover', function () { // show the toast on mouseover
+    var toast = new bootstrap.Toast(toastGraph)
+    toast.show() // show the toast
   });
-  window.onload = function() {
-    var toast = new bootstrap.Toast(toastLiveExample)
-    toast.show()
+  window.onload = function() { // when the page loads
+    var toast = new bootstrap.Toast(toastGraph)
+    toast.show() // show the toast
   };
 }</script>
 `;
@@ -109,16 +116,20 @@ GM_xmlhttpRequest({
 	url: camelurl,
 
 	onload: function () {
+		// when the page is loaded
 		$("#unifiedPrice_feature_div").append(
-			"<div id='camelcamelcamel' style='margin-top: 0px; margin-left: 0px'><div class='p-0 m-0' style='position:relative;z-index: 10'>" +
+			// add the bootstrap divs
+			"<div id='camelcamelcamel' class='p-0 m-0' style='margin-top: 0px; margin-left: 0px'><div class='p-0 m-0' style='position:relative;z-index: 15000'>" +
 				bootstrap +
 				"</div></div>"
 		);
-		$("body").append(bootstrapScript);
+		$("body").append(bootstrapScript); // add the bootstrap script
 		$("head").prepend(
-			`<link rel="stylesheet" href="https://raw.githubusercontent.com/cdmichaelb/Amazon-Camel-Graph/main/css/c3a.css" type="text/css" />`
+			// add the custom bootstrap styles
+			`<link rel="stylesheet" href="https://cdmichaelb.github.io/css/c3a.css" type="text/css" />`
 		);
 		$("head").append(
+			// add the bootstrap script
 			`<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>`
 		);
 	},
