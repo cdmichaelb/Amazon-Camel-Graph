@@ -2,4 +2,4 @@
 
 Add CamelCamelCamel graph + link to Amazon product pages.
 
-[Userscript](../camel3amazon.user.js)
+[Userscript](https://raw.githubusercontent.com/cdmichaelb/Amazon-Camel-Graph/main/camel3amazon.user.js)
