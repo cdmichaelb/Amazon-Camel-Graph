@@ -12,3 +12,5 @@ Better readme
 Fix for when you change size or color or style.
 
 Fix for when no sales history is available.
+
+Requires tampermonky or geasemonkey or similiar plugin.
