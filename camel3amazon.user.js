@@ -77,7 +77,7 @@ var link2 =
 	"/" +
 	`${chart}.png?force=1&zero=0&w=${width}&h=${height}&desired=false&legend=1&ilt=1&tp=all&fo=0) no-repeat bottom;  background-size: 100% auto;'></div></a>`;
 var camelurl = `https://${country}.camelcamelcamel.com/product/${asin}`;
-var bootstrap = `<button type="button" class="btn btn-primary bg-dark text-light m-0 p-0" id="liveToastBtn">Price History</button>
+var bootstrap = `<button type="button" class="btn bg-dark text-light m-0 p-0" id="liveToastBtn">Price History</button>
 <div class="p-0" style="position:relative;z-index: 15000">
   <div id="liveToast" class="toast translate-middle-x m-0 p-0" role="alert" aria-live="assertive" aria-atomic="true" style="position:absolute;z-index: 15000">
     <div class="toast-body m-0 p-0" style="position:float;z-index: 15000">
@@ -116,8 +116,10 @@ GM_xmlhttpRequest({
 		);
 		$("body").append(bootstrapScript);
 		$("head").prepend(
-			`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" type="text/css" />` +
-				`<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>`
+			`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" type="text/css" />`
+		);
+		$("head").append(
+			`<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>`
 		);
 	},
 });
