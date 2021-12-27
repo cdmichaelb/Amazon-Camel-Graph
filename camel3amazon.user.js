@@ -108,7 +108,7 @@ GM_xmlhttpRequest({
 	url: camelurl,
 
 	onload: function () {
-		$("#corePrice_desktop").append(
+		$("#unifiedPrice_feature_div").append(
 			"<div id='camelcamelcamel' style='margin-top: 0px; margin-left: 0px'><div class='p-0 m-0' style='position:relative;z-index: 10'>" +
 				bootstrap +
 				"</div></div>"
