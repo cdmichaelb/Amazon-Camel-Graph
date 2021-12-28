@@ -74,7 +74,7 @@ var link2 =
 	country +
 	".camelcamelcamel.com/product/" +
 	asin +
-	"'><div id='toasty-image' class='m-0 p-0'; z-index: 15000; style='position: static; height: " +
+	"'><div id='toasty-image' class='m-0 p-0'; z-index: 15000; style='position: absolute; height: " +
 	height2 +
 	"px;  width: " +
 	width +
@@ -83,13 +83,13 @@ var link2 =
 	"/" +
 	asin +
 	"/" +
-	`${chart}.png?force=1&zero=0&w=${width}&h=${height}&desired=false&legend=1&ilt=1&tp=all&fo=0) no-repeat bottom;  background-size: 100% auto;'></div></a><div class="p-0 m-0" style="position: static;width: fit-content"><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close">X</button></div>`;
+	`${chart}.png?force=1&zero=0&w=${width}&h=${height}&desired=false&legend=1&ilt=1&tp=all&fo=0) no-repeat bottom;  background-size: 100% auto;'></div></a><div class="p-0 m-0" style="position: absolute;width: fit-content"><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close">X</button></div>`;
 var camelurl = `https://${country}.camelcamelcamel.com/product/${asin}`; // create the CamelCamelCamel URL
 // Generate the bootstrap divs
 var bootstrap = `<button type="button" class="btn bg-dark text-light m-0 p-0" id="liveToastBtn">Price History</button>
 <div class="p-0 m-0" style="position:relative;z-index: 15000">
-  <div id="liveToast" class="toast translate-middle-x m-0 p-0" role="alert" aria-live="assertive" aria-atomic="true" style="position: static;width: fit-content;z-index: 15000">
-    <div class="toast-body m-0 p-0" style="position: static;width: fit-content;z-index: 15000">
+  <div id="liveToast" class="toast translate-middle-x m-0 p-0" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute;width: fit-content;z-index: 15000">
+    <div class="toast-body m-0 p-0" style="position: absolute;width: fit-content;z-index: 15000">
       ${link2}
     </div>
   </div>
@@ -100,7 +100,7 @@ var bootstrapScript = `
 var toastGraph = document.getElementById('liveToast') // get the toast
 var toastImage = document.getElementById('toasty-image') // get the image
 if (toastTrigger) { // if the button exists
-  
+
   toastTrigger.addEventListener('click', function () { // add event listener to the button
     var toast = new bootstrap.Toast(toastGraph)
     toast.show() // show the toast
@@ -122,9 +122,9 @@ GM_xmlhttpRequest({
 
 	onload: function () {
 		// when the page is loaded
-		$("#unifiedPrice_feature_div").append(
+		$("body").prepend(
 			// add the bootstrap divs
-			"<div id='camelcamelcamel' class='p-0 m-0' style='margin-top: 0px; margin-left: 0px'><div class='p-0 m-0' style='position:relative;z-index: 15000'>" +
+			"<div id='camelcamelcamel' class='p-0 m-0' style='margin-top: 0px; margin-left: 0px'><div class='p-0 m-0' style='position:absolute;top:150px;left:55vw;z-index: 15000'>" +
 				bootstrap +
 				"</div></div>"
 		);
