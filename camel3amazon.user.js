@@ -2,7 +2,7 @@
 // @name           Amazon Camel Graph Revived/Fixed Again
 // @author         cdmichaelb
 // @downloadURL    https://raw.githubusercontent.com/cdmichaelb/Amazon-Camel-Graph/main/camel3amazon.user.js
-// @version        2.0.4
+// @version        2.0.5
 // @description    Add CamelCamelCamel graph + link to Amazon product pages.
 // @namespace      AmazonCamelGraph
 // @include        https://*amazon.*/*
