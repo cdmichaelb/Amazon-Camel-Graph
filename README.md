@@ -7,6 +7,7 @@ Add CamelCamelCamel graph + link to Amazon product pages.
 ![Preview](/images/demo.gif)
 
 ToDo:
+
 Better readme
 
 Fix for when you change size or color or style.
